@@ -5,6 +5,7 @@ import { NAVIGATION } from "@/constants";
 const tabLabel: Record<string, string> = {
   [NAVIGATION.homeNavigator]: "Home",
   [NAVIGATION.profileNavigator]: "Profile",
+  [NAVIGATION.dashboard]: "Dashboard",
 };
 
 interface TabBarLabelProps {

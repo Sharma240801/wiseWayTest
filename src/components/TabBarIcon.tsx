@@ -6,6 +6,7 @@ import { NAVIGATION } from "@/constants";
 const tabIcon: Record<string, ImageSourcePropType> = {
   [NAVIGATION.homeNavigator]: homeIcon,
   [NAVIGATION.profileNavigator]: settingsIcon,
+  [NAVIGATION.dashboard]: homeIcon,
 };
 
 interface TabBarIconProps {

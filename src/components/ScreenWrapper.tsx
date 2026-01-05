@@ -54,7 +54,7 @@ const styles = StyleSheet.create((theme, rt) => ({
   },
   container: {
     flex: 1,
-    paddingBottom: rt.insets.bottom,
+    // paddingBottom: rt.insets.bottom,
   },
   scrollContainer: {
     flexGrow: 1,

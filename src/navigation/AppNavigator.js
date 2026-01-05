@@ -1,16 +1,17 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useTheme} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import {TabBarIcon} from '@/components';
-import {NAVIGATION} from '@/constants';
-import {HomeNavigator} from '@/navigation/HomeNavigator';
-import {ProfileNavigator} from '@/navigation/ProfileNavigator';
-import {TabBarLabel} from '@/components/TabBarLabel';
+import { TabBarIcon } from '@/components';
+import { NAVIGATION } from '@/constants';
+import { HomeNavigator } from "@/navigation/HomeNavigator";
+import { ProfileNavigator } from "@/navigation/ProfileNavigator";
+import { Dashboard } from "@/screens";
+import { TabBarLabel } from "@/components/TabBarLabel";
 
 const Tab = createBottomTabNavigator();
 
 export function AppNavigator() {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const renderTabIcon = (color, route) => (
     <TabBarIcon color={color} routeName={route.name} />
@@ -21,13 +22,15 @@ export function AppNavigator() {
 
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: colors.activeTab,
         tabBarInactiveTintColor: colors.inactiveTab,
         headerShown: false,
-        tabBarIcon: ({color}) => renderTabIcon(color, route),
-        tabBarLabel: ({color}) => renderTabLabel(color, route),
-      })}>
+        tabBarIcon: ({ color }) => renderTabIcon(color, route),
+        tabBarLabel: ({ color }) => renderTabLabel(color, route),
+      })}
+    >
+      <Tab.Screen name={NAVIGATION.dashboard} component={Dashboard} />
       <Tab.Screen name={NAVIGATION.homeNavigator} component={HomeNavigator} />
       <Tab.Screen
         name={NAVIGATION.profileNavigator}
