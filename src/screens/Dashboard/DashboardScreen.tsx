@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     },
     content: {
         padding: 20,
-        marginTop: -20, // Overlap with header
     },
     statsGrid: {
         flexDirection: 'row',
