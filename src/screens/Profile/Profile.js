@@ -10,14 +10,11 @@ import { useDispatch } from "react-redux";
 const Home = () => {
   const { theme } = useUnistyles();
   const dispatch = useDispatch();
-  const onPressLogout = () => {
-    dispatch(logout());
-  };
+
 
   return (
     <ScreenWrapper style={styles.container}>
       <Text style={styles.title}>Profile</Text>
-      <Button title="Logout" style={styles.btnStyle} onPress={onPressLogout} />
     </ScreenWrapper>
   );
 };
