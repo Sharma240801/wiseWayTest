@@ -1,136 +1,117 @@
-# ExpoTemplate
+# React Native Template App (Analytics Dashboard)
 
-A modern, customizable React Native template app built with Expo, React Navigation, Redux Toolkit, Unistyles theming, and localization support. This template provides a solid foundation for building cross-platform mobile applications for Android, iOS, and Web.
+A robust, enterprise-grade React Native template built with **Expo**, **Redux Toolkit**, **Unistyles**, and **React Navigation**. This project serves as a comprehensive starting point for building high-performance mobile applications with a focus on data visualization and clean architecture.
 
-## Features
+## 🚀 Key Features
 
-- **Authentication Flow**: Login, logout, and user state management with Redux Toolkit.
-- **Navigation**: Bottom tab navigation with Home and Profile screens using React Navigation.
-- **Custom Theming**: Light and dark themes powered by Unistyles.
-- **Localization**: Built-in support for English and Spanish (i18n-js, expo-localization).
-- **Reusable Components**: Button, TextField, FullScreenLoader, Toast notifications, and more.
-- **API Integration**: Axios-based API client with RTK Query for authentication and user endpoints.
-- **Persistent State**: Redux state persistence using redux-persist and MMKV storage.
-- **Custom Fonts**: Open Sans font family included and pre-configured.
-- **Responsive Design**: Breakpoints and scaling utilities for adaptive layouts.
-- **Expo EAS Ready**: Pre-configured for EAS build and deployment.
+-   **Complex Data Handling**: Implementation of a nested analytics dashboard using mock API responses.
+-   **Adaptive Theming**: Real-time Light/Dark mode switching powered by [Unistyles](https://unistyl.es/).
+-   **Navigation Architecture**: Dynamic switching between Auth and App stacks based on authentication state.
+-   **Global State Management**: Integrated with Redux Toolkit (RTK) and persistence via MMKV.
+-   **Localization**: Multi-language support (English/Spanish) using `i18n-js` and `expo-localization`.
+-   **Modern UI Components**: A library of reusable, theme-aware components (Button, TextField, KPICards, etc.).
+-   **Responsive Design**: Breakpoint-based layouts that adjust to different screen sizes.
 
-## Project Structure
+---
 
-```
-reactnativetemplateapp/
-  ├── android/           # Native Android project
-  ├── ios/               # Native iOS project
-  ├── src/
-  │   ├── assets/        # Fonts and images
-  │   ├── components/    # Reusable UI components
-  │   ├── constants/     # App-wide constants
-  │   ├── localization/  # i18n setup and translations
-  │   ├── navigation/    # Navigation stacks and tabs
-  │   ├── redux/         # Redux store, slices, services
-  │   ├── screens/       # App screens (Home, Login, Profile)
-  │   ├── storage/       # Storage utilities
-  │   ├── styles/        # Theming and breakpoints
-  │   ├── theme/         # Font and text styles
-  │   └── utils/         # Helper functions
-  ├── App.js             # App entry point
-  ├── app.json           # Expo app config
-  ├── package.json       # Project dependencies and scripts
-  └── ...
+## 📂 Project Structure
+
+```text
+src/
+├── assets/             # Global assets like fonts and local images
+├── components/         # Atomic UI components (Buttons, Inputs, Loaders)
+├── constants/          # Static data, mock APIs, and configuration
+├── localization/       # i18n setup and translation JSON files
+├── navigation/         # Navigators (Stack, Tab, Root logic)
+├── redux/              # Redux setup (Store, Slices, RTK Query Services)
+├── screens/            # Application screens (feature-based folders)
+├── storage/            # MMKV storage instance and utilities
+├── styles/             # Unistyles themes, breakpoints, and global styles
+├── theme/              # Font family and typography configurations
+└── utils/              # Helper functions and hooks
 ```
 
-## Getting Started
+---
+
+## 🛠️ How Everything Works
+
+### 1. Theming (Unistyles)
+The app uses `react-native-unistyles` for styling. Themes are defined in `src/styles/themes.ts`.
+-   **Dynamics**: The theme instance is automatically injected into components via the `createStyleSheet` hook.
+-   **Switching**: Controlled globally. Components respond instantly to system theme changes or manual overrides.
+-   **Breakpoints**: Defined in `src/styles/breakpoints.ts`, allowing for different styles on mobile vs. tablet.
+
+### 2. Navigation Flow
+Navigation is managed in `src/navigation/`.
+-   **`RootNavigator`**: Checks the `isLoggedIn` state from Redux.
+-   **`AuthNavigator`**: Handles Login/Signup flows.
+-   **`AppNavigator`**: Handles the main application (Home, Profile, Dashboard).
+-   **Splash Screen**: Stays visible until fonts and initial resources are loaded.
+
+### 3. State Management (Redux & MMKV)
+-   **Store**: Located in `src/redux/store/`. It combines slices and RTK Query services.
+-   **Persistence**: Uses `redux-persist` combined with `react-native-mmkv` for high-performance, synchronous disk storage.
+-   **User Slice**: Manages authentication tokens and profile data.
+
+### 4. Dashboard Implementation
+The `DashboardScreen` is a showcase of complex UI building.
+-   **Data Fetching**: Simulates an API call fetching deeply nested JSON from `mockData.js`.
+-   **Data Derivation**: Uses `useMemo` to transform raw API data (e.g., calculating growth percentages from revenue stats).
+-   **Sub-components**: Separated into `DashboardHeader`, `KPICard`, `ActivityList`, `PlatformStats`, and `RegionStats` for better maintainability.
+-   **States**: Handles loading (ActivityIndicator), empty, and error states gracefully.
+
+### 5. Localization
+-   Located in `src/localization/`.
+-   To add a language: Add a new JSON file in `translations/` and register it in `i18n.js`.
+-   Usage: Use the `i18n.t('key')` function within components.
+
+---
+
+## 🔧 Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or newer recommended)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install/) or npm
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+-   Node.js (v18+)
+-   Yarn or npm
+-   Expo Go (for testing on physical devices)
 
 ### Installation
+1.  **Clone & Install**:
+    ```bash
+    git clone <repo-url>
+    cd reactnativetemplateapp
+    yarn install
+    ```
+2.  **Run Development Server**:
+    ```bash
+    yarn start
+    ```
+3.  **Launch on Platform**:
+    -   Press `a` for Android Emulator.
+    -   Press `i` for iOS Simulator.
 
-1. **Clone the repository:**
-   ```sh
-   git clone <your-repo-url>
-   cd reactnativetemplateapp
-   ```
-2. **Install dependencies:**
-   ```sh
-   yarn install
-   # or
-   npm install
-   ```
-3. **Start the development server:**
-   ```sh
-   yarn start
-   # or
-   npm run start
-   ```
+---
 
-### Running on Devices
+## 📝 development Guide
 
-- **Android:**
-  ```sh
-  yarn android
-  ```
-- **iOS:**
-  ```sh
-  yarn ios
-  ```
-- **Web:**
-  ```sh
-  yarn web
-  ```
+### Adding a New Screen
+1.  Create a folder in `src/screens/`.
+2.  Define the screen component and export it.
+3.  Add the screen to the appropriate Navigator in `src/navigation/`.
 
-### Build Scripts
+### Adding a New API Endpoint
+1.  Create or update a service in `src/redux/services/`.
+2.  Use RTK Query's `createApi` to define endpoints.
+3.  Add the generated hook to your component.
 
-- `yarn build:android:staging` / `yarn build:android:development` / `yarn build:android:production`
-- `yarn build:ios:staging` / `yarn build:ios:development` / `yarn build:ios:production`
+### Updating Themes
+-   Modify `src/styles/themes.ts` to change colors, margins, or shared constants globally.
 
-See `package.json` for all available scripts.
+---
 
-## Theming & Customization
-- Uses [react-native-unistyles](https://unistyl.es/) for adaptive theming (light/dark).
-- Edit `src/styles/themes.ts` to customize colors.
-- Responsive breakpoints in `src/styles/breakpoints.ts`.
-
-## Localization
-- English and Spanish translations in `src/localization/translations/`.
-- Add more languages by extending the translation files and updating `src/localization/i18n.js`.
-
-## API & State Management
-- API base URL is set via environment variables (`EXPO_PUBLIC_BASE_URL`).
-- Authentication endpoints: `/auth/login`, `/auth/register`, `/auth/logout`.
-- Redux Toolkit Query for API calls, with persistent state using MMKV.
-
-## Custom Components
-- **Button**: Primary, secondary, and disabled styles, loading state, icons.
-- **TextField**: Customizable input with optional icons.
-- **FullScreenLoader**: Modal loading indicator.
-- **ToastAlert**: Success and error toast notifications.
-- **ScreenWrapper**: Handles safe area, scroll, and loading overlay.
-
-## Fonts
-- Open Sans font family included in `src/assets/fonts/` and loaded via `src/theme/fonts.js`.
-
-## Technologies Used
-- [Expo](https://expo.dev/)
-- [React Native](https://reactnative.dev/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [React Navigation](https://reactnavigation.org/)
-- [Unistyles](https://unistyl.es/)
-- [i18n-js](https://github.com/fnando/i18n-js)
-- [MMKV Storage](https://github.com/mrousavy/react-native-mmkv)
-- [Axios](https://axios-http.com/)
-
-## Environment Variables
-- Configure API endpoints in `.env.*` files (see `eas.json` for examples):
-  - `EXPO_PUBLIC_BASE_URL`
-  - `EXPO_PUBLIC_SOCKET_URL`
-
-## EAS Build
-- Pre-configured for [Expo Application Services (EAS)](https://docs.expo.dev/eas/).
-- See `eas.json` for build profiles.
-
-## License
-
-This project is provided as a template and does not include a license by default. Add your own license as needed. 
+## 📦 Dependencies
+-   **Theming**: `react-native-unistyles`
+-   **Navigation**: `@react-navigation/native`
+-   **State**: `@reduxjs/toolkit`, `react-redux`, `redux-persist`
+-   **Storage**: `react-native-mmkv`
+-   **Icons**: `expo-vector-icons`
+-   **Fonts**: `expo-font`, `Open Sans`
